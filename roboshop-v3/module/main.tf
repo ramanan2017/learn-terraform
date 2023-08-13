@@ -1,5 +1,5 @@
 resource "aws_instance" "instance" {
-  ami                    = data.aws_ami.ami
+  ami                    = data.aws_ami.ami.id
   instance_type          = var.instance_type
   vpc_security_group_ids = var.security_group
 
@@ -9,10 +9,11 @@ resource "aws_instance" "instance" {
 }
 
 resource "aws_route53_record" "record" {
+  zone_id = var.zone_id
   name     = "${var.name}-dev.ramdevops.co.uk"
   type     = "A"
   ttl      = 30
-  zone_id  = [aws_instance.instance, "private_ip"]
+  rocords  = [aws_instance.instance.private_ip]
 }
 
 
