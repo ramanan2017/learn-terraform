@@ -12,7 +12,7 @@ resource "aws_route53_record" "record" {
   name     = "${var.name}-dev.ramdevops.co.uk"
   type     = "A"
   ttl      = 30
-  zone_id  = [aws_instance.instance.private_ip]
+  zone_id  = [aws_instance.instance, "private_ip"]
 }
 
 
